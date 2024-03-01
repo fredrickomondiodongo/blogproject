@@ -1,0 +1,32 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+  {% for posts in posts %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ posts.author.profile.image.url }}" alt="">
+        <div class="media-body">
+          <div class="article-metadata">
+            <a class="mr-2" href="#">{{ posts.author }}</a>
+            <small class="text-muted">{{ posts.date_posted }}</small>
+          </div>
+          <h2><a class="article-title" href="{% url 'blog-detail' posts.id  %}">{{ posts.title }}</a></h2>
+          <p class="article-content">{{ posts.content }}</p>
+        </div>
+        <br>
+      </article>
+  {% endfor  %}
+{% endblock content %}
+
+{% block sidebar %}
+ <h3 style="color:white;">Our Sidebar</h3>
+    <p  style="color:white;">You can put any information here you'd like.
+      <ul class="list-group">
+        <li class="list-group-item list-group-item-light">Latest Posts</li>
+        <li class="list-group-item list-group-item-light">Announcements</li>
+        <li class="list-group-item list-group-item-light">Calendars</li>
+        <li class="list-group-item list-group-item-light">etc</li>
+      </ul>
+    </p> 
+
+
+{% endblock %}

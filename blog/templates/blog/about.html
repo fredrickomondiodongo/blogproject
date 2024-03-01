@@ -1,0 +1,65 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+    <div class="container" style="background: white; padding: 20px; margin-top: 10px; border-radius: 20px;">
+        <h1>Blog About</h1>
+        <hr>
+         
+        <h3><b>Welcome to Hotspot Blogging </b></h3>
+
+        At Hotspot Blogging, we are passionate about sharing latest content.Our blog site is not just a platform for sharing knowledge; it's a community-driven space where users can create accounts and actively participate by posting their own insights, experiences, and tips on sustainable living.
+
+        <br><br>
+
+
+
+        <h3><b>What We Do</b></h3>
+
+        Hotspot Blogging is your go-to destination for lifestyle,health,sports and so much more. We provide valuable insights, expert advice, and engaging content.
+        <br><br>
+
+        <h3><b>Why Choose Us</b></h3>
+        
+        Quality Content: We are committed to delivering high-quality content that is informative, engaging, and relevant to our audience.
+        
+        Resources: Access a wealth of resources, including articles, guides, tutorials, and more, to support your journey .
+    </div>
+{% endblock content %}
+{% block Gist %}
+  <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" style="padding-top: 120px;">
+    <a id="list-group" style="text-decoration: none;" href="" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
+      <!-- <svg class="bi me-2" width="30" height="24"><use xlink:href="#bootstrap"/></svg> -->
+      <span class="fs-5 fw-semibold" id="gist-btn">Latest Gist</span>
+    </a>
+    <div class="list-group list-group-flush border-bottom scrollarea">
+      <a href="#" class="list-group-item list-group-item-action  lh-tight" aria-current="true">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">Seriously, Stop Trying to Teach Toddlers How to Code...By Desphixs
+        </strong>
+          <small>Thur</small>
+        </div>
+        <div class="col-10 mb-1 small">AS A BABY nerd, I was obsessed with Hackers. The 1995 cult movie... </div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">Its not a bug - It's a feature... by Desphixs</strong>
+          <small class="text-muted">Wed</small>
+        </div>
+        <div class="col-10 mb-1 small">When it comes to coding, everything works like a miracle, let me use that word...hahaha</div>
+      </a>
+      <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">I wanted to be a great programmer but...by Desphixs</strong>
+          <small class="text-muted">Tues</small>
+        </div>
+        <div class="col-10 mb-1 small">in my family trait, nobody knows anything about computers and i wanted to be the greatest computer scientist ever and...</div>
+      </a>
+       <a href="#" class="list-group-item list-group-item-action py-3 lh-tight">
+        <div class="d-flex w-100 align-items-center justify-content-between">
+          <strong class="mb-1">I wanted to be a great programmer but...by Desphixs</strong>
+          <small class="text-muted">Mon</small>
+        </div>
+        <div class="col-10 mb-1 small">in my family trait, nobody knows anything about computers and i wanted to be the greatest computer scientist ever and...</div>
+      </a>
+    </div>
+  </div>
+{% endblock %}
