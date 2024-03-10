@@ -1,11 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render,get_object_or_404
 from django.http import HttpResponse
 from .models import Post
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 # Create your views here.
-
 
 
 # def home(request):
@@ -17,6 +16,12 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 
 def about(request):
  	return render(request, 'blog/about.html')
+
+def mypost(request):
+	return render(request, 'blog/myposts.html')
+
+class MyPostView(LoginRequiredMixin, TemplateView):
+    template_name = 'blog/myposts.html'
 
 class PostListView(LoginRequiredMixin,ListView):
 	model = Post
@@ -68,3 +73,7 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 			return True
 
 		return False
+
+def post_detail(request, post_id):
+    post = get_object_or_404(Post, id=post_id)
+    return render(request, 'post_detail.html', {'post': post})
