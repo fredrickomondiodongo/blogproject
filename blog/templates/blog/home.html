@@ -9,7 +9,13 @@
           <small class="text-muted">{{ posts.date_posted }}</small>
         </div>
         <h2><a class="article-title" href="{% url 'blog-detail' posts.id  %}">{{ posts.title }}</a></h2>
-        <p class="article-content">{{ posts.content }}</p>
+        <p class="article-content">{{ posts.content|truncatechars:200 }}
+        
+        </p>
+          {% if posts.content|length > 200 %}
+            <a href="{% url 'blog-detail' posts.id %}">Read More</a>
+          {% endif %}
+
       </div>
       <br>
     </article>
