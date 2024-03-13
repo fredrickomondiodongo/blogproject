@@ -1,24 +1,23 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-
-        <article class="media content-section">
-            <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" alt="">
-            <div class="media-body">
-              <div class="article-metadata">
-                <a class="mr-2" href="#">{{ object.author }}</a>
-                <small class="text-muted">{{ object.date_posted }}</small>
-                {% if object.author == user%}
-                  <div>
-                    <a  class="btn btn-outline-success" href="{% url 'blog-update' object.id %}">update</a> 
-                   <a  class="btn btn-outline-danger" href="{% url 'blog-delete' object.id %}">Delete</a>
-                  </div>
-                {% endif %}
-              </div>
-              <h2><a class="article-title" href="">{{ object.title }}</a></h2>
-              <p class="article-content">{{ object.content }}</p>
-            </div>
-            <br>
-          </article>   
+  <article class="media content-section">
+    <img class="rounded-circle article-img" src="{{ object.author.profile.image.url }}" alt="">
+    <div class="media-body">
+      <div class="article-metadata">
+        <a class="mr-2" href="#">{{ object.author }}</a>
+        <small class="text-muted">{{ object.date_posted }}</small>
+        {% if object.author == user%}
+          <div>
+            <a  class="btn btn-outline-success" href="{% url 'blog-update' object.id %}">update</a> 
+           <a  class="btn btn-outline-danger" href="{% url 'blog-delete' object.id %}">Delete</a>
+          </div>
+        {% endif %}
+      </div>
+      <h2><a class="article-title" href="">{{ object.title }}</a></h2>
+      <p class="article-content">{{ object.content }}</p>
+    </div>
+    <br>
+  </article>   
 {% endblock content %}
 
 {% block comment %}
@@ -26,11 +25,25 @@
     <div class="media-body">
       <div class="article-metadata">        
         <h2> Comments</h2>
-        <a href="">Add Comment</a> 
         <hr>
-        {% if not post.comments.all %}
-          <p>No Comments Yet</p>
-        {% else %}
+         <h6>Add Comment</h6> 
+          <div class="bg-light p-2">
+            <div class="d-flex flex-row align-items-start">
+              <img class="rounded-circle article-img" src="{{request.user.profile.image.url }}" alt="">
+              <textarea class="form-control ml-1 shadow-none textarea"></textarea>
+            </div>
+            <div class="mt-2 text-right">
+              <a class="btn btn-outline-success"  type="button">Post Comment</a> 
+              <a  class="btn btn-outline-danger" type="button">Cancel</a>
+            </div>
+          </div>
+
+          {% csrf_token %}
+          {{ comment_form.content.label_tag }} <!-- Label for the content field -->
+          {{ comment_form.content }} <!-- Input field for the content -->
+          {{ comment_form.content.errors }} <!-- Display any form errors for the content field -->
+          <!-- <button type="submit">Submit</button> -->
+        
           {% for comment in post.comments.all %}
             <div class="comment">
               <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}" alt="">
@@ -42,7 +55,7 @@
             </div>
             <br>
           {% endfor %}
-        {% endif %}
+       
       </div>
     </div>
   </article>
@@ -89,3 +102,4 @@
     </div>
   </div>
 {% endblock %}
+
