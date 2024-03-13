@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from .models import Post
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from .forms import CommentForm
 # Create your views here.
 
 
@@ -76,4 +76,5 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 def post_detail(request, post_id):
     post = get_object_or_404(Post, id=post_id)
-    return render(request, 'post_detail.html', {'post': post})
+    comment_form = CommentForm()  # Create an instance of the CommentForm
+    return render(request, 'post_detail.html', {'post': post, 'comment_form': comment_form})

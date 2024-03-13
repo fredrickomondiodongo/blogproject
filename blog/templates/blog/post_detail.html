@@ -18,9 +18,38 @@
               <p class="article-content">{{ object.content }}</p>
             </div>
             <br>
-          </article>
-    
+          </article>   
 {% endblock content %}
+
+{% block comment %}
+  <article class="media content-section">
+    <div class="media-body">
+      <div class="article-metadata">        
+        <h2> Comments</h2>
+        <a href="">Add Comment</a> 
+        <hr>
+        {% if not post.comments.all %}
+          <p>No Comments Yet</p>
+        {% else %}
+          {% for comment in post.comments.all %}
+            <div class="comment">
+              <img class="rounded-circle article-img" src="{{ comment.author.profile.image.url }}" alt="">
+              <strong>
+                <a class="mr-2" href="#">{{ comment.author }}</a>
+                <small class="text-muted">{{ comment.date_posted }}</small>
+              </strong>
+              <p class="article-content" style="margin-left: 90px;">{{ comment.content }}</p>
+            </div>
+            <br>
+          {% endfor %}
+        {% endif %}
+      </div>
+    </div>
+  </article>
+{% endblock %}
+
+
+
 {% block Gist %}
   <div class="d-flex flex-column align-items-stretch flex-shrink-0 bg-white" style="width: 380px;" style="padding-top: 120px;">
     <a id="list-group" style="text-decoration: none;" href="" class="d-flex align-items-center flex-shrink-0 p-3 link-dark text-decoration-none border-bottom">
