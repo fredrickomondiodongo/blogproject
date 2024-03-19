@@ -1,9 +1,11 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404, redirect
 from django.http import HttpResponse
-from .models import Post
+from .models import Post,Comment
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView,TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from .forms import CommentForm
+from django.urls import reverse_lazy
+from django.contrib import messages
 # Create your views here.
 
 
@@ -74,7 +76,58 @@ class PostDeleteView(LoginRequiredMixin,UserPassesTestMixin,DeleteView):
 
 		return False
 
-def post_detail(request, post_id):
-    post = get_object_or_404(Post, id=post_id)
-    comment_form = CommentForm()  # Create an instance of the CommentForm
-    return render(request, 'post_detail.html', {'post': post, 'comment_form': comment_form})
+
+
+def post_detail(request, pk):
+    post = get_object_or_404(Post, pk=pk) 
+    comments =Comment.objects.filter(post=post)    
+    context = {
+      	'post': post,
+    }
+
+    return render(request, 'post_detail.html', context)
+
+def add_comment(request,pk):
+    if request.method == 'POST':
+        post = get_object_or_404(Post, pk=pk)
+        content = request.POST.get("content")
+        author = request.user
+        comment = Comment(content=content, author=author, post=post)
+        comment.save()
+        messages.success(request, "The comment is Posted")
+       
+
+        return redirect('post_detail',pk=pk)
+    else:
+        # Retrieve the post using the provided pk parameter
+        post = get_object_or_404(Post, pk=pk)
+        context = {'post': post}
+        return render(request, 'post_detail.html', context)
+
+
+
+
+    # post = get_object_or_404(Post, id=pk)
+    # form = CommentForm()
+
+    # context = {
+    #     'form': form
+    # }
+    # return render(request, 'post_detail.html', context)
+
+   
+    # if request.method == 'POST':
+    #     comment_form = CommentForm(request.POST)
+    #     if comment_form.is_valid():
+    #         comment = comment_form.save(commit=False)
+    #         comment_text = request.POST.get('comment_text')
+    #         comment.post = post
+    #         comment.author = request.user
+    #         comment.content = comment_text
+    #         comment.save()
+    #         return redirect('post_detail', post_id=post_id)      
+    # else:
+    #     comment_form = CommentForm()
+
+
+    # return render(request, 'post_detail.html', {'comment_form': comment_form})
