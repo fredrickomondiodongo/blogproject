@@ -30,11 +30,15 @@
           <div class="bg-light p-2">
             <div class="d-flex flex-row align-items-start">
               <img class="rounded-circle article-img" src="{{request.user.profile.image.url }}" alt="">
-              <textarea class="form-control ml-1 shadow-none textarea"></textarea>
-            </div>
-            <div class="mt-2 text-right">
-              <a class="btn btn-outline-success"  type="button">Post Comment</a> 
-              <a  class="btn btn-outline-danger" type="button">Cancel</a>
+              <form action="{% url 'add_comment' pk=post.pk %}" method="post" style="width:100%;">
+                 {% csrf_token %}
+                <textarea class="form-control ml-1 shadow-none textarea" name="content"></textarea>
+
+                <div class="mt-2 text-right">
+                  <input class="btn btn-outline-success"  type="submit" value="Post Comment" ></input> 
+                 <a href="{% url 'post_detail' pk=post.pk %}" class="btn btn-outline-danger">Cancel</a>
+                </div>
+              </form>
             </div>
           </div>
 

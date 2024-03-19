@@ -303,3 +303,18 @@ body {
 .comment-content {
   margin-left: 50px; /* Adjust this value based on the width of the comment image */
 }
+
+
+.postbtn {
+  background-color: #28a745; /* Green color */
+  color: #fff; /* White text */
+  border-color: #28a745; /* Green border color */
+  cursor: pointer;
+}
+
+/* Custom styles for the "Cancel" button */
+.cancelbtn {
+  color: #dc3545; /* Red text */
+  border-color: #dc3545; /* Red border color */
+   cursor: pointer;
+}
